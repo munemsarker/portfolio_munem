@@ -1,65 +1,59 @@
-# My Portfolio Website - Overview 🚀
+# Munem Sarker - Personal Portfolio 🚀
 
-This repository contains the open-source version of my personal portfolio website.  
-Feel free to explore the code and use it for learning and inspiration.
-
----
-
-## ⚠️ Usage Notice
-
-This project is shared for learning purposes only.
-
-Please do NOT:
-- Clone or replicate the full website or design
-- Repost it with minor content changes
-- Use this project for commercial/client work
-- Create tutorials or content using this exact project
-
-If you use parts of the code, you must provide proper credit linking back to the original repository.
-
-Build your own version — don’t just copy.
-
-— Moncy Yohannan
+Welcome to the official portfolio repository of **Munem Sarker** — Professional AI Artist, Visualization Expert, Product Visualization Specialist, Data Scientist, Machine Learning Engineer, and Brand Designer.
 
 ---
 
-## 🛠️ Instructions
+## 🌟 Overview
 
-I have modified the GSAP Club plugins using trial versions.  
-⚠️ Note: Trial plugins cannot be used for production or hosting.
-
-For official GSAP Club plugins, refer here:  
-https://gsap.com/docs/v3/Installation/
-
----
-
-## ⚙️ Tech Stack
-
-React • TypeScript • GSAP • Three.js • WebGL • HTML • CSS • JavaScript
+A 3D interactive portfolio website built with modern creative web technologies:
+- **Interactive 3D Simulation**: Real-time physics canvas powered by Three.js and Rapier Physics.
+- **Dynamic Animations**: Fluid transitions and scroll effects powered by GSAP and ScrollSmoother.
+- **Showcase Projects**: Commercial AI product photography, branding campaigns, machine learning pipelines, and digital experiences.
+- **Responsive Architecture**: Optimized for desktop, tablet, and mobile devices.
 
 ---
 
-## 🎨 Assets Usage
+## ⚙️ Tech Stack & Creative Tools
 
-Some 3D assets included in this repository are free to use for learning purposes.
-
-However:
-
-- The original 3D avatar used on my live portfolio is NOT included in this repository
-- That avatar is a custom asset created over ~1 month
-- It is not open source and not available for reuse
-
-Any usage, extraction, or redistribution of that avatar from my live website is strictly prohibited.
+- **Frontend & 3D**: React 18, TypeScript, Three.js, React Three Fiber, React Three Rapier, GSAP, Vite
+- **AI & Visual Creation**: Google Gemini, Google Flow, Adobe Photoshop, Adobe Illustrator
+- **Data Science & ML**: Python, Scikit-learn, Statistical Analysis, Predictive Modeling
+- **Styling**: Modern CSS3, CSS Grid, Responsive Design
 
 ---
 
-![Protfolio-Preview](https://github.com/user-attachments/assets/3c4557e7-6392-4928-b8a9-7b2476ef4edd)
+## 🚀 Getting Started
+
+### 1. Install Dependencies
+```bash
+npm install
+```
+
+### 2. Run Local Development Server
+```bash
+npm run dev
+```
+
+### 3. Build for Production
+```bash
+npm run build
+```
+
+---
+
+## 📬 Contact & Connect
+
+- **Email**: [munem@engineer.com](mailto:munem@engineer.com)
+- **Phone**: +8801878-220882
+- **Location**: Boikali, Khulna, Bangladesh
+- **GitHub**: [github.com/munemsarker](https://github.com/munemsarker)
+- **Fiverr**: [fiverr.com/munem_ai](https://www.fiverr.com/munem_ai)
+- **LinkedIn**: [linkedin.com/in/munemsarker](https://bd.linkedin.com/in/munemsarker)
+- **X / Twitter**: [x.com/munem_sarker](https://x.com/munem_sarker)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the Personal Portfolio License (PPL) v1.0.
-
-See the LICENSE file for full details
-
+© 2026 Munem Sarker. All Rights Reserved.
