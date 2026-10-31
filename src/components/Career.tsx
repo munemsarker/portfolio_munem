@@ -74,22 +74,6 @@ const Career = () => {
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Apparel Merchandising Intern</h4>
-                <h5>Ha-Meem Group | Bangladesh</h5>
-              </div>
-              <h3>2023</h3>
-            </div>
-            <p>
-              Completed practical training in apparel merchandising, Bill of
-              Materials (BOM), CAD, ERP systems, garment sampling, and quality
-              control operations, communicating directly with international
-              brands like GAP.
-            </p>
-          </div>
-
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
                 <h4>B.Sc. in Computer Science & Eng.</h4>
                 <h5>University of Rajshahi</h5>
               </div>
