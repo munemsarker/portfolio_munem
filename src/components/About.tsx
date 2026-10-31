@@ -6,9 +6,12 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-          dolores numquam iusto Ratione earum ducimus autem id iure pariatur
-          dolorum quae maiores.
+          I am Munem Sarker, a multidisciplinary creative and technology
+          professional specializing in photorealistic AI visual creation,
+          commercial product photography, brand design, data science, and
+          machine learning. Combining artistic creativity with analytical
+          precision, I bridge the gap between human visual storytelling and
+          intelligent digital solutions.
         </p>
       </div>
     </div>

@@ -8,26 +8,39 @@ import {
   Physics,
   RigidBody,
   CylinderCollider,
+  CuboidCollider,
   RapierRigidBody,
 } from "@react-three/rapier";
+import "./styles/TechStack.css";
 
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+  "/images/tech-python.png",
+  "/images/tech-photoshop.png",
+  "/images/tech-illustrator.png",
+  "/images/tech-gemini.png",
+  "/images/tech-flow.png",
+  "/images/tech-ml.png",
+  "/images/tech-wordpress.png",
+  "/images/tech-mysql.png",
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
+const techPills = [
+  { name: "Python", category: "Data & ML" },
+  { name: "Google Gemini", category: "Generative AI" },
+  { name: "Google Flow", category: "Visual AI" },
+  { name: "Photoshop", category: "Design" },
+  { name: "Illustrator", category: "Vector" },
+  { name: "Machine Learning", category: "Data Science" },
+  { name: "WordPress", category: "Web Dev" },
+  { name: "MySQL", category: "Database" },
+];
+
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
-const spheres = [...Array(30)].map(() => ({
-  scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
+const spheres = [...Array(20)].map(() => ({
+  scale: [0.8, 0.95, 1, 1.05, 0.85][Math.floor(Math.random() * 5)],
 }));
 
 type SphereProps = {
@@ -48,35 +61,31 @@ function SphereGeo({
   const api = useRef<RapierRigidBody | null>(null);
 
   useFrame((_state, delta) => {
-    if (!isActive) return;
-    delta = Math.min(0.1, delta);
-    const impulse = vec
-      .copy(api.current!.translation())
-      .normalize()
-      .multiply(
-        new THREE.Vector3(
-          -50 * delta * scale,
-          -150 * delta * scale,
-          -50 * delta * scale
-        )
-      );
-
-    api.current?.applyImpulse(impulse, true);
+    if (!isActive || !api.current) return;
+    delta = Math.min(0.05, delta);
+    const pos = api.current.translation();
+    const impulse = vec.set(
+      -pos.x * 12 * delta * scale,
+      -pos.y * 14 * delta * scale,
+      -pos.z * 12 * delta * scale
+    );
+    api.current.applyImpulse(impulse, true);
   });
 
   return (
     <RigidBody
-      linearDamping={0.75}
-      angularDamping={0.15}
-      friction={0.2}
-      position={[r(20), r(20) - 25, r(20) - 10]}
+      linearDamping={0.85}
+      angularDamping={0.3}
+      friction={0.25}
+      restitution={0.65}
+      position={[r(10), r(4), r(3)]}
       ref={api}
       colliders={false}
     >
       <BallCollider args={[scale]} />
       <CylinderCollider
         rotation={[Math.PI / 2, 0, 0]}
-        position={[0, 0, 1.2 * scale]}
+        position={[0, 0, 1.1 * scale]}
         args={[0.15 * scale, 0.275 * scale]}
       />
       <mesh
@@ -100,16 +109,16 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
   const ref = useRef<RapierRigidBody>(null);
 
   useFrame(({ pointer, viewport }) => {
-    if (!isActive) return;
+    if (!isActive || !ref.current) return;
     const targetVec = vec.lerp(
       new THREE.Vector3(
         (pointer.x * viewport.width) / 2,
         (pointer.y * viewport.height) / 2,
         0
       ),
-      0.2
+      0.25
     );
-    ref.current?.setNextKinematicTranslation(targetVec);
+    ref.current.setNextKinematicTranslation(targetVec);
   });
 
   return (
@@ -126,31 +135,25 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
-    };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
-      });
-    });
-    window.addEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsActive(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
     };
   }, []);
+
   const materials = useMemo(() => {
     return textures.map(
       (texture) =>
@@ -158,56 +161,89 @@ const TechStack = () => {
           map: texture,
           emissive: "#ffffff",
           emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
+          emissiveIntensity: 0.25,
+          metalness: 0.45,
+          roughness: 0.7,
+          clearcoat: 0.15,
         })
     );
   }, []);
 
   return (
-    <div className="techstack">
-      <h2> My Techstack</h2>
+    <section className="techstack-section" id="techstack" ref={containerRef}>
+      <div className="techstack-container">
+        <div className="techstack-header">
+          <h2>
+            My <span>Techstack</span>
+          </h2>
+          <p className="techstack-subtitle">
+            Core technologies, creative platforms & interactive 3D physics simulation
+          </p>
+        </div>
 
-      <Canvas
-        shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
-        className="tech-canvas"
-      >
-        <ambientLight intensity={1} />
-        <spotLight
-          position={[20, 20, 25]}
-          penumbra={1}
-          angle={0.2}
-          color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
-        />
-        <directionalLight position={[0, 5, -4]} intensity={2} />
-        <Physics gravity={[0, 0, 0]}>
-          <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
-            <SphereGeo
-              key={i}
-              {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
-              isActive={isActive}
+        <div className="techstack-stage">
+          <div className="techstack-stage-hint">
+            <span>● Move cursor to interact</span>
+          </div>
+
+          <Canvas
+            shadows
+            gl={{ alpha: true, stencil: false, depth: false, antialias: true }}
+            camera={{ position: [0, 0, 18], fov: 32, near: 1, far: 100 }}
+            onCreated={(state) => (state.gl.toneMappingExposure = 1.4)}
+            className="tech-canvas"
+          >
+            <ambientLight intensity={1.2} />
+            <spotLight
+              position={[20, 20, 25]}
+              penumbra={1}
+              angle={0.25}
+              color="white"
+              castShadow
+              shadow-mapSize={[512, 512]}
             />
+            <directionalLight position={[0, 6, -4]} intensity={2.2} />
+            <Physics gravity={[0, 0, 0]}>
+              {/* Invisible Boundaries strictly inside the 460px stage */}
+              <CuboidCollider position={[0, -5, 0]} args={[16, 0.5, 8]} />
+              <CuboidCollider position={[0, 5, 0]} args={[16, 0.5, 8]} />
+              <CuboidCollider position={[-12, 0, 0]} args={[0.5, 10, 8]} />
+              <CuboidCollider position={[12, 0, 0]} args={[0.5, 10, 8]} />
+              <CuboidCollider position={[0, 0, -5]} args={[16, 10, 0.5]} />
+              <CuboidCollider position={[0, 0, 5]} args={[16, 10, 0.5]} />
+
+              <Pointer isActive={isActive} />
+              {spheres.map((props, i) => (
+                <SphereGeo
+                  key={i}
+                  {...props}
+                  material={materials[i % materials.length]}
+                  isActive={isActive}
+                />
+              ))}
+            </Physics>
+            <Environment
+              files="/models/char_enviorment.hdr"
+              environmentIntensity={0.4}
+              environmentRotation={[0, 4, 2]}
+            />
+            <EffectComposer enableNormalPass={false}>
+              <N8AO color="#0f002c" aoRadius={2} intensity={1.1} />
+            </EffectComposer>
+          </Canvas>
+        </div>
+
+        <div className="techstack-pills">
+          {techPills.map((pill, idx) => (
+            <div className="tech-pill-badge" key={idx}>
+              <span className="pill-dot"></span>
+              <span className="pill-name">{pill.name}</span>
+              <span className="pill-cat">{pill.category}</span>
+            </div>
           ))}
-        </Physics>
-        <Environment
-          files="/models/char_enviorment.hdr"
-          environmentIntensity={0.5}
-          environmentRotation={[0, 4, 2]}
-        />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
-        </EffectComposer>
-      </Canvas>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

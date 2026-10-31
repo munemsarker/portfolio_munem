@@ -87,24 +87,25 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>DEVELOP</h3>
-              <h4>Description</h4>
+              <h3>AI & VISUALS</h3>
+              <h4>Commercial & Creative</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae.
+                Crafting photorealistic commercial product photography, mockups,
+                and marketing visuals with strict preservation of geometry,
+                textures, studio lighting, and brand identity.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Three.js</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Css</div>
-                <div className="what-tags">Node.js</div>
-                <div className="what-tags">Next.js</div>
-                <div className="what-tags">Express.js</div>
-                <div className="what-tags">PHP</div>
-                <div className="what-tags">MySql</div>
+                <div className="what-tags">AI Image Generation</div>
+                <div className="what-tags">Product Photography</div>
+                <div className="what-tags">Photorealistic Mockups</div>
+                <div className="what-tags">Google Gemini</div>
+                <div className="what-tags">Google Flow</div>
+                <div className="what-tags">Adobe Photoshop</div>
+                <div className="what-tags">Adobe Illustrator</div>
+                <div className="what-tags">Brand Identity</div>
+                <div className="what-tags">Visual Storytelling</div>
+                <div className="what-tags">Retouching</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -128,22 +129,25 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>DESIGN</h3>
-              <h4>Description</h4>
+              <h3>DATA & TECH</h3>
+              <h4>Engineering & Analytics</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae
+                Applying Computer Science fundamentals, machine learning models,
+                statistical analysis, and Python to engineer predictive data
+                solutions and modern digital platforms.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Blender</div>
-                <div className="what-tags">Zbrush</div>
-                <div className="what-tags">UI Design</div>
-                <div className="what-tags">Motion</div>
-                <div className="what-tags">Rigging</div>
-                <div className="what-tags">3D Animation</div>
-                <div className="what-tags">Character Design</div>
-                <div className="what-tags">Modelling</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">Machine Learning</div>
+                <div className="what-tags">Data Science</div>
+                <div className="what-tags">Deep Learning</div>
+                <div className="what-tags">Statistical Analysis</div>
+                <div className="what-tags">Predictive Modeling</div>
+                <div className="what-tags">Data Visualization</div>
+                <div className="what-tags">Algorithms & DS</div>
+                <div className="what-tags">WordPress</div>
+                <div className="what-tags">NLP</div>
               </div>
               <div className="what-arrow"></div>
             </div>

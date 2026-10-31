@@ -1,0 +1,175 @@
+.techstack-section {
+  position: relative;
+  width: 100%;
+  margin: 100px auto;
+  padding: 80px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 10, 22, 0.45) 0%,
+    rgba(22, 13, 36, 0.75) 50%,
+    rgba(15, 10, 22, 0.45) 100%
+  );
+  border-top: 1px solid rgba(194, 164, 255, 0.16);
+  border-bottom: 1px solid rgba(194, 164, 255, 0.16);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  clear: both;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.techstack-container {
+  width: var(--cWidth);
+  max-width: 1250px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.techstack-header {
+  text-align: center;
+  width: 100%;
+  position: relative;
+}
+
+.techstack-header h2 {
+  font-size: clamp(34px, 4.2vw, 54px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.techstack-header h2 > span {
+  color: var(--accentColor);
+}
+
+.techstack-subtitle {
+  font-size: 15px;
+  color: #a8a8a8;
+  margin: 10px 0 0 0;
+  letter-spacing: 0.6px;
+  font-weight: 300;
+}
+
+/* Dedicated, isolated 3D stage with strict bounds */
+.techstack-stage {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  border-radius: 20px;
+  background: radial-gradient(
+    circle at center,
+    rgba(127, 64, 255, 0.08) 0%,
+    rgba(8, 6, 12, 0.95) 75%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7),
+    0 12px 30px -10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.techstack-stage-hint {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accentColor);
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tech-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* Badges strip strictly below the 3D stage */
+.techstack-pills {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.tech-pill-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 30px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.tech-pill-badge:hover {
+  border-color: var(--accentColor);
+  background: rgba(194, 164, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accentColor);
+  box-shadow: 0 0 8px var(--accentColor);
+}
+
+.pill-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.pill-cat {
+  font-size: 11px;
+  color: #8c8c8c;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+@media screen and (max-width: 900px) {
+  .techstack-section {
+    margin: 60px auto;
+    padding: 50px 0;
+  }
+  .techstack-stage {
+    height: 380px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .techstack-stage {
+    height: 320px;
+  }
+  .tech-pill-badge {
+    padding: 6px 12px;
+  }
+  .pill-name {
+    font-size: 12px;
+  }
+}
+

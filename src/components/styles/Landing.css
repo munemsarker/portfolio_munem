@@ -209,6 +209,7 @@
   position: relative;
   display: flex;
   flex-wrap: nowrap;
+  white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
