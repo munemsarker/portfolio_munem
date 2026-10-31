@@ -1,50 +1,237 @@
 .about-section {
   display: flex;
   align-items: center;
-  justify-content: left;
-  place-items: center;
+  justify-content: center;
   position: relative;
   opacity: 1;
   height: auto;
   width: var(--cWidth);
+  max-width: 1920px;
   margin: auto;
+  padding: 80px 0px 60px 0px;
+  box-sizing: border-box;
 }
+
 .about-me {
-  padding: 50px 0px;
-  padding-bottom: 0;
-  width: 500px;
-  max-width: calc(100% - 15px);
+  width: 100%;
+  max-width: 580px;
+  padding: 36px 28px;
+  box-sizing: border-box;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(194, 164, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(194, 164, 255, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
 }
-.about-me h3 {
-  font-size: 25px;
-  text-transform: uppercase;
-  letter-spacing: 7px;
-  font-weight: 400;
+
+/* Ambient glow orb inside card */
+.about-me::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 124, 255, 0.2) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(194, 164, 255, 0.08);
+  border: 1px solid rgba(194, 164, 255, 0.25);
   color: var(--accentColor);
-}
-
-.about-me p {
-  font-size: 33px;
+  font-size: 11px;
   font-weight: 600;
-  line-height: 36px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
 }
 
+.about-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #a87cff;
+  box-shadow: 0 0 8px #a87cff;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+.about-me h3 {
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.about-me h3::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(194, 164, 255, 0.4) 0%,
+    transparent 100%
+  );
+  max-width: 100px;
+}
+
+.about-me p.para {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.2px;
+  color: rgba(234, 229, 236, 0.9);
+  margin: 0 0 24px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.about-pillars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-pillar-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  font-weight: 500;
+  color: #eae5ec;
+  transition: all 0.3s ease;
+}
+
+.about-pillar-tag:hover {
+  background: rgba(194, 164, 255, 0.1);
+  border-color: rgba(194, 164, 255, 0.35);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.pillar-icon {
+  color: var(--accentColor);
+  font-size: 10px;
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 1;
+}
+
+.about-stat-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.about-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(194, 164, 255, 0.3);
+  background: rgba(194, 164, 255, 0.06);
+}
+
+.about-stat-num {
+  font-size: 17px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #c2a4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #c2a4ff;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+
+.about-stat-label {
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: rgba(234, 229, 236, 0.65);
+  font-weight: 400;
+}
+
+/* Tablet screens */
 @media only screen and (min-width: 600px) {
   .about-section {
-    justify-content: center;
+    padding: 100px 0 80px 0;
+  }
+  .about-me {
+    max-width: 620px;
+    padding: 40px 32px;
+  }
+  .about-me p.para {
+    font-size: 17px;
+    line-height: 1.75;
+  }
+  .about-stat-num {
+    font-size: 19px;
+  }
+  .about-stat-label {
+    font-size: 11px;
   }
 }
+
 @media only screen and (min-width: 768px) {
-  .about-me {
-    width: 500px;
-    max-width: calc(100% - 70px);
-    transform: translateY(0%);
-  }
   .about-section {
     opacity: 1;
   }
 }
+
+/* Desktop layout: integrates with the 3D character on the left */
 @media only screen and (min-width: 1025px) {
   .about-section {
     width: var(--cWidth);
@@ -55,17 +242,56 @@
     opacity: 1;
   }
   .about-me {
-    padding: 0px;
-    width: 50%;
+    padding: 40px 38px;
+    width: 48%;
+    max-width: 640px;
+    border-radius: 28px;
   }
-  .about-me p {
-    font-size: 1.9vw;
-    line-height: 2.3vw;
+  .about-me p.para {
+    font-size: 1.15vw;
+    line-height: 1.7vw;
+    margin-bottom: 20px;
+  }
+  .about-me h3 {
+    font-size: 28px;
   }
 }
+
 @media only screen and (min-width: 1950px) {
-  .about-me p {
-    font-size: 2.5rem;
-    line-height: 2.7rem;
+  .about-me {
+    max-width: 780px;
+    padding: 50px 48px;
+  }
+  .about-me p.para {
+    font-size: 1.35rem;
+    line-height: 2.1rem;
+  }
+  .about-stat-num {
+    font-size: 24px;
+  }
+  .about-stat-label {
+    font-size: 13px;
+  }
+}
+
+/* Extra small screens (small phones <= 380px) */
+@media only screen and (max-width: 380px) {
+  .about-me {
+    padding: 24px 16px;
+    border-radius: 18px;
+  }
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .about-stat-card {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+  .about-stat-num {
+    margin-bottom: 0;
   }
 }
