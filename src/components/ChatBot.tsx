@@ -218,12 +218,42 @@ const ChatBot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleClose = (e?: React.MouseEvent | React.TouchEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+    setIsOpen(false);
+  };
+
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
-      setTimeout(() => inputRef.current?.focus(), 200);
+      // Only auto-focus on desktop devices to avoid triggering mobile virtual keyboard shift
+      if (typeof window !== "undefined" && window.innerWidth > 768) {
+        setTimeout(() => inputRef.current?.focus(), 250);
+      }
     }
-  }, [isOpen, messages, isTyping]);
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      scrollToBottom();
+    }
+  }, [messages, isTyping]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        handleClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
 
   const findBestResponse = (query: string): { response: string; hasWhatsAppCta: boolean } => {
     const lower = query.toLowerCase().trim();
@@ -291,11 +321,8 @@ const ChatBot = () => {
   };
 
   const renderFormattedText = (rawText: string) => {
-    // Process markdown-like syntax: bold (**text**), links ([text](url)), and linebreaks
     const parts = rawText.split("\n");
     return parts.map((line, lineIdx) => {
-      // Link regex: \[([^\]]+)\]\(([^)]+)\)
-      // Bold regex: \*\*([^*]+)\*\*
       const formattedLine = parseLineMarkup(line);
       return (
         <p key={lineIdx} style={{ margin: line ? "0 0 6px 0" : "0 0 4px 0" }}>
@@ -306,7 +333,6 @@ const ChatBot = () => {
   };
 
   const parseLineMarkup = (line: string) => {
-    // Split on markdown link or bold tokens
     const tokens = line.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
     return tokens.map((token, idx) => {
       if (token.startsWith("[") && token.includes("](")) {
@@ -333,12 +359,27 @@ const ChatBot = () => {
   };
 
   return (
-    <div className="chatbot-wrapper">
-      {/* Floating Toggle Button */}
+    <div className={`chatbot-wrapper ${isOpen ? "open" : ""}`}>
+      {/* Semi-transparent Backdrop on Mobile for 1-Tap Dismissal */}
+      <div
+        className={`chatbot-backdrop ${isOpen ? "visible" : ""}`}
+        onClick={handleClose}
+        onTouchEnd={handleClose}
+        aria-hidden="true"
+        data-cursor="disable"
+      />
+
+      {/* Floating Trigger Button */}
       <button
         type="button"
         className="chatbot-trigger-btn"
         onClick={() => setIsOpen(!isOpen)}
+        onTouchEnd={(e) => {
+          if (!isOpen) {
+            e.preventDefault();
+            setIsOpen(true);
+          }
+        }}
         aria-label="Toggle Munem Sarker Chat Assistant"
         data-cursor="disable"
         title="Chat with Munem Sarker"
@@ -358,6 +399,16 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       <div className={`chatbot-window ${isOpen ? "visible" : "hidden"}`}>
+        {/* Mobile Pull Handle for quick close gesture */}
+        <div
+          className="chatbot-pull-handle-wrap"
+          onClick={handleClose}
+          onTouchEnd={handleClose}
+          aria-label="Pull to close"
+        >
+          <div className="chatbot-pull-handle"></div>
+        </div>
+
         {/* Header */}
         <div className="chatbot-header">
           <div className="chatbot-header-left">
@@ -365,7 +416,7 @@ const ChatBot = () => {
               <img src="/images/munem-avatar.jpg" alt="Munem Sarker" />
               <span className="chatbot-status-dot"></span>
             </div>
-            <div>
+            <div className="chatbot-header-info">
               <div className="chatbot-header-title">Munem Sarker</div>
               <div className="chatbot-header-subtitle">
                 <span className="chatbot-header-pulse"></span> AI Assistant • Online
@@ -381,16 +432,19 @@ const ChatBot = () => {
               data-cursor="disable"
               title="Direct WhatsApp"
             >
-              <FaWhatsapp style={{ fontSize: "14px" }} /> WhatsApp
+              <FaWhatsapp style={{ fontSize: "15px" }} />
+              <span>WhatsApp</span>
             </a>
             <button
               type="button"
               className="chatbot-header-close-btn"
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
+              onTouchEnd={handleClose}
               aria-label="Close Chat"
               data-cursor="disable"
+              title="Close chat"
             >
-              <IoClose />
+              <IoClose style={{ pointerEvents: "none" }} />
             </button>
           </div>
         </div>
@@ -440,7 +494,7 @@ const ChatBot = () => {
             </div>
           )}
 
-          {/* Quick Suggestion Chips (shown after initial or on idle) */}
+          {/* Quick Suggestion Chips */}
           <div className="chatbot-chips-wrap">
             {SUGGESTIONS.map((suggestion, idx) => (
               <button
