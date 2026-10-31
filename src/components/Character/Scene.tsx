@@ -67,12 +67,15 @@ const Scene = () => {
             setTimeout(() => {
               light.turnOnLights();
               animations.startIntro();
-            }, 2500);
+            }, 1000);
           });
           window.addEventListener("resize", () =>
             handleResize(renderer, camera, canvasDiv, character)
           );
         }
+      }).catch((err) => {
+        console.error("Error loading character:", err);
+        progress.loaded();
       });
 
       let mouse = { x: 0, y: 0 },
